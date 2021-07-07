@@ -24,11 +24,11 @@ jobs:
     - name: Build with Maven
       run: mvn -B spring-boot:build-image --file pom.xml
     - name: Docker Tag
-      run: docker tag docker.io/library/spring-native-app:0.0.1-SNAPSHOT "spring-native-app:${{ github.event.commits[0].id }}"
+      run: docker tag docker.io/library/spring-native-app:0.0.1-SNAPSHOT "frostbitez/spring-native-app:${{ github.event.commits[0].id }}"
     - name: Login Docker
       env:
         DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
         DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
       run: echo "${DOCKER_PASSWORD}" | docker login --username ${DOCKER_USERNAME} --password-stdin
     - name: Push Image
-      run: docker push "spring-native-app:${{ github.event.commits[0].id }}"
+      run: docker push "frostbitez/spring-native-app:${{ github.event.commits[0].id }}"
